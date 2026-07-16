@@ -1,0 +1,18 @@
+{
+  "name": "Origami Esports",
+  "tagline": "Every move, perfectly placed.",
+  "founded": "2025",
+  "color": "#2b2b2b",
+
+  "nav": [
+    { "label": "Home",   "file": "index.php" },
+    { "label": "Players", "file": "player.php" }
+  ],
+
+  "socials": [
+    { "platform": "Twitter",   "handle": "@orghandle", "url": "https://twitter.com/orghandle" },
+    { "platform": "Instagram", "handle": "@orghandle", "url": "https://instagram.com/orghandle" },
+    { "platform": "TikTok",    "handle": "@orghandle", "url": "https://tiktok.com/@orghandle" },
+    { "platform": "Twitch",    "handle": "orghandle",  "url": "https://twitch.tv/orghandle" }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "avatar_src": "../assets/images/lil-guy.png",
+  "bullets": [
+    "Judgement Fold: Flex DPS",
+    "I'm white",
+    "I'm black",
+    "North America's #1 Lucio"
+  ],
+  "player_info": {
+    "firstname": "Ethan",
+    "lastname": "Crawford",
+    "username": "OkDragon",
+    "team": "Judgement Fold",
+    "role": "Flex DPS"
+  },
+  "flair": {
+    "emoji": "🐉",
+    "color": "#000000"
+  },
+
+  "bio": "No thoughts, head empty.",
+
+  "gallery": [
+    "https://youtu.be/Am0BGj7vwcQ?si=7FgCNbHAViBL2NUC",
+    "../assets/images/nezuyumi_video.mp4"
+  ]
+}
+
