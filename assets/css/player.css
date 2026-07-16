@@ -1,0 +1,327 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #2b2b2b;
+  --bg-card: #333333;
+  --text:    #ffffff;
+  --muted:   rgba(255,255,255,0.45);
+  --accent:  rgba(255,255,255,0.08);
+  --gap:     clamp(1.5rem, 3vw, 3rem);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Fade-in on scroll ──────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children inside a reveal block */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.19s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.26s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.33s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.40s; }
+
+/* ── Layout wrapper ─────────────────────────────────────────────────────── */
+.detail-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vh, 6rem) clamp(1.5rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--gap) * 2.5);
+}
+
+/* ── Section label ──────────────────────────────────────────────────────── */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+/* ── Bio ────────────────────────────────────────────────────────────────── */
+.bio-text {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.85);
+  max-width: 72ch;
+}
+
+/* ── Stats grid ─────────────────────────────────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.stat-cell {
+  background: var(--bg);
+  padding: clamp(1.2rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.8rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stat-value {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── Photo gallery ──────────────────────────────────────────────────────── */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 3px;
+}
+
+.gallery-item {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(20%);
+  transition: filter 0.4s ease, transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.04);
+}
+
+/* ── Social links ───────────────────────────────────────────────────────── */
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.social-link:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.35);
+}
+
+.social-platform {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.social-handle {
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+/* ── Gallery Carousel ───────────────────────────────────────────────────── */
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  user-select: none;
+}
+
+.carousel-track {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: unset;
+  height: 56.25vw;
+  max-height: 75vh;
+  min-height: 240px;
+  background: var(--bg-card);
+  cursor: grab;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(60px);
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 1;
+}
+
+.carousel-slide.prev {
+  opacity: 0;
+  transform: translateX(-60px);
+  z-index: 0;
+}
+
+.carousel-slide img,
+.carousel-slide video,
+.carousel-slide iframe {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(15%);
+  transition: filter 0.4s ease;
+}
+
+.carousel-track:hover .carousel-slide.active img,
+.carousel-track:hover .carousel-slide.active video,
+.carousel-track:hover .carousel-slide.active iframe {
+  filter: grayscale(0%);
+}
+
+/* ── Controls row ── */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.carousel-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.carousel-btn:hover {
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+  background: rgba(255,255,255,0.05);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.2;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Counter ── */
+.carousel-counter {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.carousel-counter-sep {
+  opacity: 0.4;
+}
+
+/* ── Pip indicators ── */
+.carousel-pips {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.carousel-pip {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 1.8rem;
+  height: 2px;
+  background: rgba(255,255,255,0.18);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.carousel-pip.active {
+  background: rgba(255,255,255,0.85);
+  transform: scaleY(2);
+}
+
+.carousel-pip:hover:not(.active) {
+  background: rgba(255,255,255,0.4);
+}
+
+/* ── YouTube iframe — re-enable interaction when active ─────────────────── */
+.carousel-slide.active iframe {
+  pointer-events: all;
+}
+
+/* ── Local video — restore normal cursor and controls ───────────────────── */
+.carousel-slide.active video {
+  pointer-events: all;
+  cursor: default;
+}
+
+/* Don't show grab cursor when hovering over an active video */
+.carousel-track:has(.carousel-slide.active video) {
+  cursor: default;
+}
+.carousel-track:has(.carousel-slide.active video):active {
+  cursor: default;
+}

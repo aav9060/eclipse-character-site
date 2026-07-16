@@ -1,0 +1,87 @@
+/* ── Base reset & vars ───────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #2b2b2b;
+  --bg-card: #333333;
+  --text:    #ffffff;
+  --muted:   rgba(255,255,255,0.45);
+  --gap:     clamp(1.5rem, 3vw, 3rem);
+}
+
+html { scroll-behavior: smooth; }
+
+/* ── Page shell ──────────────────────────────────────────────────────────── */
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Main content area ───────────────────────────────────────────────────── */
+.page-content {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(4rem, 10vh, 8rem) clamp(1.5rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--gap) * 2);
+}
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+h1, h2, h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 2.2rem); }
+h3 { font-size: clamp(1.1rem, 2vw, 1.5rem); }
+
+p {
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.8);
+  max-width: 70ch;
+}
+
+a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+a:hover { opacity: 0.7; }
+
+/* ── Section label (matches detail page style) ───────────────────────────── */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+/* ── Divider ─────────────────────────────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ── Push footer to bottom when content is short ────────────────────────── */
+.site-footer {
+  margin-top: auto;
+}

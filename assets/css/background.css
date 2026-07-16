@@ -1,0 +1,29 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+html,body{width:100%;height:100%; overflow-x:hidden;}
+
+.scene{position:relative;width:100vw;height:100vh;overflow:hidden;background:#2b2b2b}
+
+/* White triangle — top-left to bottom-center */
+.light-side{position:absolute;inset:0;background:#fff;clip-path:polygon(0% 0%,0% 100%,55% 100%)}
+
+/* Text layer clipped to same triangle */
+.text-layer{position:absolute;inset:0;clip-path:polygon(0% 0%,0% 100%,55% 100%);overflow:hidden}
+
+/* Rotated conveyor — angle & rows injected by JS */
+.conveyor{position:absolute;top:-50%;left:-50%;width:220%;height:220%;transform-origin:105vw 150vh}
+
+.text-row{display:flex;gap:3rem;padding:1.2rem 0;white-space:nowrap;animation:row-scroll linear infinite}
+@keyframes row-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.text-row span{font-family:'DM Mono',monospace;font-weight:300;font-size:2.6rem;letter-spacing:.08em;user-select:none}
+
+/* Profile image — centered on hypotenuse, positioned by JS */
+.profile-pin{position:absolute;display:flex;flex-direction:column;align-items:center;transform:translateX(-50%);z-index:10}
+.profile-pin .avatar{height:75vh;width:auto;display:block;object-fit:contain}
+
+/* Dark side — title & bullets */
+.dark-content{position:absolute;top:50%;transform:translateY(-50%);left:45%;right:2rem;color:#fff;padding:2vw}
+.dark-content .main-title{font-family:'DM Sans',sans-serif;font-weight:600;font-size:clamp(1.4rem,2.8vw,3rem);line-height:1.15;margin-bottom:1.2em;letter-spacing:-.01em;white-space:normal;overflow-wrap:break-word}
+.dark-content .bullets{list-style:none;display:flex;flex-direction:column;gap:.6em}
+.dark-content .bullets li{font-family:'DM Sans',sans-serif;font-weight:300;font-size:clamp(.9rem,1.6vw,1.4rem);display:flex;align-items:baseline;gap:.5em;opacity:.85}
+.dark-content .bullets li::before{content:'—';opacity:.5;flex-shrink:0}
