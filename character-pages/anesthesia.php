@@ -26,6 +26,7 @@ $bullets = $_header_bullets ?? [];
   <div class="profile-pin" id="profilePin">
     <img class="avatar" src="<?= htmlspecialchars($_header_avatar_src ?: '../assets/images/placeholder.png') ?>" alt="Profile photo"/>
   </div>
+   <div class="colored-side" style="background:<?= htmlspecialchars($_header_color) ?>;"></div>
   <div class="dark-content">
     <?php if (!empty($_header_title_image)): ?>
       <img class="character-title-image" src="<?= htmlspecialchars($_header_title_image) ?>" alt="Astra title" />
@@ -36,10 +37,33 @@ $bullets = $_header_bullets ?? [];
       <div class="character-full-name"><?= htmlspecialchars(trim(implode(' ', array_filter([$_header_fn ?? '', $_header_ln ?? ''])))) ?></div>
       <div class="character-nickname"><?= htmlspecialchars($_header_un ?: '') ?></div>
     </div>
-    <ul class="bullets">
+    <div class="feature-frames">
+      <div class="feature-frame"> 
+        <div class="frame-image" style="border:3px solid <?= htmlspecialchars($_header_color) ?>;"> 
+          <img src="../assets/images/role-icon/support.png" alt="Feature One"> 
+        </div> 
+        <div class="frame-title">Role</div> 
+        <div class="frame-subtitle">SUPPORT</div> 
+      </div> 
+      <div class="feature-frame"> 
+        <div class="frame-image" style="border:3px solid <?= htmlspecialchars($_header_color) ?>;"> 
+          <img src="../assets/images/faction-icon/archeology.png" alt="Feature Two"> 
+        </div> 
+        <div class="frame-title">Faction</div> 
+        <div class="frame-subtitle">ARCHEOLOGY FACTION</div> 
+      </div> <div class="feature-frame"> 
+        <div class="frame-image" style="border:3px solid <?= htmlspecialchars($_header_color) ?>;"> 
+          <img src="../assets/images/weapon-type/fist.png" alt="Feature Three"> 
+        </div> 
+        <div class="frame-title">Weapon Type</div> 
+        <div class="frame-subtitle">MELEE</div> 
+      </div>
+    </div>
+   <ul class="bullets">
       <?php foreach ($bullets as $bullet): ?>
       <li><?= htmlspecialchars($bullet) ?></li>
       <?php endforeach; ?>
+      </div>
     </ul>
   </div>
 </div>

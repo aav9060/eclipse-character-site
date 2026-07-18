@@ -2,11 +2,6 @@
   "avatar_src": "../assets/images/anesthesia/anesthesia.png",
   "portrait_src": "../assets/images/anesthesia/ana-profile.png",
   "character_title": "../assets/images/lancelot/lancelot-title.png",
-  "bullets": [
-    "A tired soul who can no longer remember her past.",
-    "Has the strength to manipulate any technology she wishes.",
-    "Awfully sleepy and just wants everyone to slow down."
-  ],
   "faction": "Echo//Net",
   "faction_page":"./factions/echonet.php",
   "character_info": {
