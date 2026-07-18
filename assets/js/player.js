@@ -20,6 +20,9 @@ document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.obs
   const btnPrev   = document.getElementById('carouselPrev');
   const btnNext   = document.getElementById('carouselNext');
   const elCurrent = document.getElementById('carouselCurrent');
+  const lightbox  = document.getElementById('imageLightbox');
+  const lightboxImg = document.getElementById('imageLightboxImage');
+  const lightboxClose = document.getElementById('imageLightboxClose');
   const total     = slides.length;
   let current     = 0;
 
@@ -111,6 +114,22 @@ document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.obs
     elCurrent.textContent = current + 1;
   }
 
+  function openLightbox(src) {
+    if (!lightbox || !lightboxImg) return;
+    lightboxImg.src = src;
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightbox || !lightboxImg) return;
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  }
+
   // ── Init ──────────────────────────────────────────────────────────────────
   slides[0].classList.add('active');
   startAuto();
@@ -124,6 +143,10 @@ document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.obs
   });
 
   document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
+      closeLightbox();
+      return;
+    }
     if (e.key === 'ArrowRight') { goTo(current + 1, 'next'); resetAuto(); }
     if (e.key === 'ArrowLeft')  { goTo(current - 1, 'prev'); resetAuto(); }
   });
@@ -163,6 +186,20 @@ document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.obs
   });
 
   track.addEventListener('mouseleave', () => { isDragging = false; });
+
+  document.querySelectorAll('.gallery-image').forEach((img) => {
+    img.addEventListener('click', () => openLightbox(img.dataset.image || img.src));
+  });
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', closeLightbox);
+  }
+
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
 
   // Native video play/pause events
   track.addEventListener('play',  () => stopAuto(), true);

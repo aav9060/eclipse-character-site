@@ -1,0 +1,35 @@
+{
+  "avatar_src": "../assets/images/anesthesia.png",
+  "portrait_src": "../assets/images/ana-profile.png",
+  "bullets": [
+    "A tired soul who can no longer remember her past.",
+    "Has the strength to manipulate any technology she wishes.",
+    "Awfully sleepy and just wants everyone to slow down."
+  ],
+  "faction": "Echo//Net",
+  "character_info": {
+    "first_name": "Liliana",
+    "last_name": "",
+    "nickname": "Anesthesia",
+    "profession": "Leader of Echo//Net",
+    "background": "She cannot recall anything before waking up in the hospital",
+    "weapon": "Giant Mechanical Hands"
+  },
+  "flair": {
+    "emoji": "✨",
+    "color": "#4b5dff"
+  },
+  "bio": "Astra moves between forgotten shrines and city markets, carrying messages that are sometimes more dangerous than they seem.",
+  "gallery": ["../assets/images/anesthesia.png", "../assets/images/ana-profile.png"],
+  "relationships": [
+    { "name": "Lancelot", "page": "/player-pages/lancelot.php" }
+  ],
+  "power": "Can turn anything \"on or off\" for a brief moment, can also manipulate any technology to her will.",
+  "associated_god": "Lunealis",
+  "key_points": [
+    "Was caught in the epicenter of the Eclipse, and now has the Fading Disease. ",
+    "She tries to cover up as much of her body as possible because parts of her have already faded, including her own hands.",
+    "Even though she cannot remember her past, she maintains her muscle memory of her power and knows how to manipulate things from the get-go."
+  ],
+  "socials": []
+}

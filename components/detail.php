@@ -1,86 +1,151 @@
 <?php
-// ─── Load player data from JSON ────────────────────────────────────────────────
-$jsonPath = $json_path ?? null;
+require_once __DIR__ . '/bio.php';
 
-if (file_exists($jsonPath)) {
-    $data = json_decode(file_get_contents($jsonPath), true);
-} else {
-    die("Player JSON not found: " . $jsonPath);
+// ─── Load character data from JSON ───────────────────────────────────────────
+$jsonPath = $json_path ?? $_header_json ?? null;
+
+if (!$jsonPath || !file_exists($jsonPath)) {
+    die("Character JSON not found: " . $jsonPath);
 }
 
-$data = json_decode(file_get_contents($json_path), true);
+$data = json_decode(file_get_contents($jsonPath), true);
 
 if (json_last_error() !== JSON_ERROR_NONE) {
-    die('Error: Failed to parse player-data-joeschmoe.json — ' . json_last_error_msg());
+    die('Error: Failed to parse character data — ' . json_last_error_msg());
 }
 
-$bio     = $data['bio']     ?? '';
+$bio     = $data['bio'] ?? '';
 $gallery = $data['gallery'] ?? [];
+$characterInfo = $data['character_info'] ?? $data['player_info'] ?? [];
+$profession = $characterInfo['profession'] ?? $characterInfo['role'] ?? $data['profession'] ?? '';
+$faction = $data['faction'] ?? $characterInfo['faction'] ?? '';
+$background = $data['background'] ?? $characterInfo['background'] ?? '';
+$power = $data['power'] ?? $characterInfo['power'] ?? '';
+$associatedGod = $data['associated_god'] ?? $data['god'] ?? $characterInfo['associated_god'] ?? '';
+$weapon = $data['weapon'] ?? $data['choice_of_weapon'] ?? $characterInfo['weapon'] ?? '';
+$keyPoints = $data['key_points'] ?? [];
+$relationships = $data['relationships'] ?? [];
 
-// ─── Detect video platform and return type + embed URL ───────────────────────
-// Returns ['type' => 'iframe'|'video', 'src' => '...']
-function video_embed(string $url): array {
-    // YouTube: youtube.com/watch?v=ID, youtu.be/ID, youtube.com/embed/ID
-    if (preg_match('/(?:youtube\.com|youtu\.be)/', $url)) {
-        if (preg_match('/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/', $url, $m)) {
-            return ['type' => 'iframe', 'src' =>
-                'https://www.youtube.com/embed/' . $m[1] . '?rel=0&modestbranding=1&playsinline=1&enablejsapi=1'];
-        }
+function is_image_asset(string $url): bool {
+    $url = trim($url);
+
+    if ($url === '') {
+        return false;
     }
 
-    // Local file: anything without http/https is treated as a local path
-    // Also catches explicit local extensions just in case
-    if (!preg_match('/^https?:\/\//', $url) || preg_match('/\.(mp4|webm|ogg|mov)$/i', $url)) {
-        return ['type' => 'video', 'src' => $url];
+    if (preg_match('/^data:image\//i', $url)) {
+        return true;
     }
 
-    // Fallback — try as iframe
-    return ['type' => 'iframe', 'src' => $url];
+    return preg_match('/\.(jpg|jpeg|png|gif|webp|svg|avif|bmp|tif|tiff)$/i', $url) === 1;
 }
-// ─────────────────────────────────────────────────────────────────────────────
+
+$galleryImages = [];
+foreach ($gallery as $asset) {
+    if (is_image_asset((string) $asset)) {
+        $galleryImages[] = (string) $asset;
+    }
+}
+
 $socials = $data['socials'] ?? [];
-// ──────────────────────────────────────────────────────────────────────────────
 ?>
 
 <div class="detail-page">
 
-  <!-- Bio -->
   <section class="reveal">
     <p class="section-label">About</p>
-    <p class="bio-text"><?= htmlspecialchars($bio) ?></p>
+    <p class="bio-text"><?= format_bio_text($bio, 'A new character profile is being written for this legend.') ?></p>
   </section>
 
-  <!-- Gallery Carousel -->
+  <section class="reveal">
+    <p class="section-label">Character Profile</p>
+    <div class="socials reveal-stagger">
+      <?php if ($profession): ?>
+      <div class="social-link">
+        <span class="social-platform">Profession</span>
+        <span class="social-handle"><?= htmlspecialchars($profession) ?></span>
+      </div>
+      <?php endif; ?>
+      <?php if ($faction): ?>
+      <div class="social-link">
+        <span class="social-platform">Faction</span>
+        <span class="social-handle"><?= htmlspecialchars($faction) ?></span>
+      </div>
+      <?php endif; ?>
+      <?php if ($background): ?>
+      <div class="social-link">
+        <span class="social-platform">Background</span>
+        <span class="social-handle"><?= htmlspecialchars($background) ?></span>
+      </div>
+      <?php endif; ?>
+      <?php if ($power): ?>
+      <div class="social-link">
+        <span class="social-platform">Power</span>
+        <span class="social-handle"><?= htmlspecialchars($power) ?></span>
+      </div>
+      <?php endif; ?>
+      <?php if ($associatedGod): ?>
+      <div class="social-link">
+        <span class="social-platform">Associated God</span>
+        <span class="social-handle"><?= htmlspecialchars($associatedGod) ?></span>
+      </div>
+      <?php endif; ?>
+      <?php if ($weapon): ?>
+      <div class="social-link">
+        <span class="social-platform">Weapon</span>
+        <span class="social-handle"><?= htmlspecialchars($weapon) ?></span>
+      </div>
+      <?php endif; ?>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <p class="section-label">Relationships</p>
+    <?php if (!empty($relationships)): ?>
+    <div class="socials reveal-stagger">
+      <?php foreach ($relationships as $relationship): ?>
+      <?php $name = is_array($relationship) ? ($relationship['name'] ?? '') : (string)$relationship; ?>
+      <?php $page = is_array($relationship) ? ($relationship['page'] ?? '') : ''; ?>
+      <?php if ($name): ?>
+      <a class="social-link" href="<?= htmlspecialchars($page ?: '#') ?>" target="_self">
+        <span class="social-platform">Linked Character</span>
+        <span class="social-handle"><?= htmlspecialchars($name) ?></span>
+      </a>
+      <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+    <?php else: ?>
+    <p class="bio-text">No recorded relationships yet.</p>
+    <?php endif; ?>
+  </section>
+
+  <section class="reveal">
+    <p class="section-label">Key Points</p>
+    <ul class="bullets">
+      <?php foreach ($keyPoints as $point): ?>
+      <li><?= htmlspecialchars($point) ?></li>
+      <?php endforeach; ?>
+    </ul>
+  </section>
+
+  <?php if (!empty($galleryImages)): ?>
   <section class="reveal">
     <p class="section-label">Gallery</p>
     <div class="carousel" id="carousel">
-
-      <!-- Track -->
       <div class="carousel-track" id="carouselTrack">
-        <?php foreach ($gallery as $i => $photo): ?>
+        <?php foreach ($galleryImages as $i => $photo): ?>
         <div class="carousel-slide" data-index="<?= $i ?>">
-          <?php $embed = video_embed($photo); ?>
-          <?php if ($embed['type'] === 'video'): ?>
-          <video
-            src="<?= htmlspecialchars($embed['src']) ?>"
-            loop playsinline preload="metadata"
-            controls
-          ></video>
-          <?php else: ?>
-          <iframe
-            src="<?= htmlspecialchars($embed['src']) ?>"
-            title="Gallery video <?= $i + 1 ?>"
-            frameborder="0"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            <?php if (strpos($embed['src'], 'youtube.com') !== false): ?>data-yt-iframe<?php endif; ?>
-          ></iframe>
-          <?php endif; ?>
+          <img
+            src="<?= htmlspecialchars($photo) ?>"
+            alt="Gallery image <?= $i + 1 ?>"
+            loading="lazy"
+            class="gallery-image"
+            data-image="<?= htmlspecialchars($photo) ?>"
+          />
         </div>
         <?php endforeach; ?>
       </div>
 
-      <!-- Controls -->
       <div class="carousel-controls">
         <button class="carousel-btn" id="carouselPrev" aria-label="Previous">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -91,7 +156,7 @@ $socials = $data['socials'] ?? [];
         <span class="carousel-counter">
           <span id="carouselCurrent">1</span>
           <span class="carousel-counter-sep">/</span>
-          <span id="carouselTotal"><?= count($gallery) ?></span>
+          <span id="carouselTotal"><?= count($galleryImages) ?></span>
         </span>
 
         <button class="carousel-btn" id="carouselNext" aria-label="Next">
@@ -101,17 +166,21 @@ $socials = $data['socials'] ?? [];
         </button>
       </div>
 
-      <!-- Pip indicators -->
       <div class="carousel-pips" id="carouselPips">
-        <?php foreach ($gallery as $i => $photo): ?>
-        <button class="carousel-pip <?= $i === 0 ? 'active' : '' ?>" data-index="<?= $i ?>" aria-label="Go to video <?= $i + 1 ?>"></button>
+        <?php foreach ($galleryImages as $i => $photo): ?>
+        <button class="carousel-pip <?= $i === 0 ? 'active' : '' ?>" data-index="<?= $i ?>" aria-label="Go to image <?= $i + 1 ?>"></button>
         <?php endforeach; ?>
       </div>
-
     </div>
   </section>
+  <?php endif; ?>
 
-  <!-- Socials -->
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <button class="image-lightbox-close" id="imageLightboxClose" aria-label="Close image">×</button>
+    <img id="imageLightboxImage" src="" alt="Expanded gallery image" />
+  </div>
+
+  <?php if (!empty($socials)): ?>
   <section class="reveal">
     <div class="socials reveal-stagger">
       <?php foreach ($socials as $s): ?>
@@ -122,6 +191,7 @@ $socials = $data['socials'] ?? [];
       <?php endforeach; ?>
     </div>
   </section>
+  <?php endif; ?>
 
 </div>
 

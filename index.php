@@ -15,7 +15,8 @@ $_page_title = 'Home';
 <?php include './components/header-footer/header.php'; ?>
 
 <main class="page-content">
-  <h1>meow :3</h1>
+  <h1>Characters of Eclipse</h1>
+  <p>Explore the roster of mythic characters, their professions, powers, and uneasy alliances.</p>
 </main>
 
 <?php include './components/header-footer/footer.php'; ?>

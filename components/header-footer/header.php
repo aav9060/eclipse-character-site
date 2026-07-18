@@ -1,18 +1,68 @@
 <?php
-// ─── Read flair color from JSON (fallback to site default) ────────────────────
-// ─── Determine which JSON file to use ─────────────────────────────
-$_header_json = $json_path ?? null;
+// ─── Initialize character data and header color ───────────────────────────
+$_header_page = basename($_SERVER['SCRIPT_NAME']);
+$_header_character_map = [
+    'lancelot.php' => 'lancelot.json',
+    'astra.php'    => 'astra.json',
+];
 
-// Fallback to default if none provided
+$_header_json = null;
+$_header_character_data = [];
+$_header_avatar_src = '';
+$_header_bullets = [];
+$_header_title = '';
+$_header_scroll_text = '';
+$_header_color = '#2b2b2b'; // default dark gray
+
+if (isset($_header_character_map[$_header_page])) {
+    $_header_json = __DIR__ . '/../../assets/json/' . $_header_character_map[$_header_page];
+}
+
 if (!$_header_json) {
     $_header_json = __DIR__ . '/../../assets/json/org-data.json';
 }
-$_header_color = '#2b2b2b'; // default dark gray
+
+$json_path = $_header_json;
 
 if (file_exists($_header_json)) {
-    $_header_data = json_decode(file_get_contents($_header_json), true);
+    $_header_character_data = json_decode(file_get_contents($_header_json), true);
     if (json_last_error() === JSON_ERROR_NONE) {
-        $_header_color = $_header_data['flair']['color'] ?? '#87cefa';
+        $_header_avatar_src = $_header_character_data['avatar_src'] ?? '';
+        $_header_bullets = $_header_character_data['bullets'] ?? $_header_character_data['key_points'] ?? [];
+        $_header_parts = $_header_character_data['character_info'] ?? $_header_character_data['player_info'] ?? [];
+        $_header_fn = $_header_parts['first_name'] ?? $_header_parts['firstname'] ?? '';
+        $_header_un = $_header_parts['nickname'] ?? $_header_parts['username'] ?? '';
+        $_header_ln = $_header_parts['last_name'] ?? $_header_parts['lastname'] ?? '';
+        $_header_emoji = $_header_character_data['flair']['emoji'] ?? '';
+        $_header_color = $_header_character_data['flair']['color'] ?? '#87cefa';
+
+        $_header_title_parts = array_filter([
+            $_header_fn ?: null,
+            $_header_ln ?: null,
+            $_header_un ? '"' . $_header_un . '"' : null,
+        ]);
+        $_header_title = trim(implode(' ', $_header_title_parts));
+        if ($_header_emoji) {
+            $_header_title = trim($_header_title . ' ' . $_header_emoji);
+        }
+
+        $_header_title_image = '';
+        $_header_full_name = trim(implode(' ', array_filter([$_header_fn, $_header_ln])));
+        $_header_display_name = trim($_header_un ?: $_header_full_name);
+        if ($_header_page === 'lancelot.php' || $_header_page === 'astra.php') {
+            $_header_title_image = '../assets/images/lancelot-title.png';
+        }
+
+        $_header_scroll_items = [];
+        foreach ($_header_parts as $_header_part_key => $_header_part_value) {
+            if (is_string($_header_part_value) && trim($_header_part_value) !== '') {
+                $_header_scroll_items[] = trim($_header_part_value);
+            }
+        }
+        $_header_scroll_text = implode(' • ', $_header_scroll_items);
+        if ($_header_scroll_text !== '') {
+            $_header_scroll_text .= ' •';
+        }
     }
 }
 
@@ -39,13 +89,44 @@ $_separator_color  = $_luminance > 0.179 ? 'rgba(0,0,0,0.2)'  : 'rgba(255,255,25
 // ─── Detect active page ───────────────────────────────────────────────────────
 $_current = basename($_SERVER['SCRIPT_NAME']);
 
+$_header_faction_groups = [];
+$_header_faction_page_map = [
+    'The Warden Circle' => '/factions/the-warden-circle.php',
+    'The Lantern Covenant' => '/factions/the-lantern-covenant.php',
+];
+foreach ($_header_character_map as $_header_page_key => $_header_json_file) {
+    $_header_faction_path = __DIR__ . '/../../assets/json/' . $_header_json_file;
+    if (!file_exists($_header_faction_path)) {
+        continue;
+    }
+
+    $_header_faction_data = json_decode(file_get_contents($_header_faction_path), true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        continue;
+    }
+
+    $_header_faction_name = trim($_header_faction_data['faction'] ?? 'Unassigned');
+    $_header_character_name = trim($_header_faction_data['character_info']['nickname'] ?? $_header_faction_data['character_info']['first_name'] ?? $_header_page_key);
+
+    $_header_faction_groups[$_header_faction_name][] = [
+        'name' => $_header_character_name,
+        'page' => '/player-pages/' . $_header_page_key,
+        'avatar' => $_header_faction_data['portrait_src'] ?? $_header_faction_data['avatar_src'] ?? '',
+    ];
+}
+ksort($_header_faction_groups);
+
+if (!empty($_header_init_only)) {
+    return;
+}
+
 $_nav_links = [
-    'index.php'  => 'Home',
-    'player.php' => 'Players',
+    'index.php'        => 'Home',
+    'characters.php'   => 'Characters',
 ];
 
 // Pages with overflow:hidden / no window scroll — pill triggers on a timer
-$_fixed_pages = ['joeschmoe8.php', 'watrre.php', 'okdragon.php', 'melon.php', 'shadowhunter.php'];
+$_fixed_pages = ['lancelot.php', 'astra.php', 'characters.php', 'archeologists.php', 'echonet.php'];
 $_use_timer   = in_array($_current, $_fixed_pages);
 // ──────────────────────────────────────────────────────────────────────────────
 ?>
@@ -57,20 +138,31 @@ $_use_timer   = in_array($_current, $_fixed_pages);
       <span class="nav-sep">·</span>
     <?php endif; ?>
 
-    <?php if ($_file === 'player.php'): ?>
+    <?php if ($_file === 'characters.php'): ?>
       
-      <div class="nav-dropdown <?= $_current === 'player.php' ? 'nav-active' : '' ?>">
-        <button class="dropdown-toggle">
+      <div class="nav-dropdown <?= $_current === 'characters.php' ? 'nav-active' : '' ?>">
+        <a class="dropdown-toggle" href="/characters.php">
           <?= htmlspecialchars($_label) ?>
-        </button>
+        </a>
 
         <div class="dropdown-menu">
-          <?php $base = '/player-pages/'; ?>
-          <a href="<?= $base ?>joeschmoe8.php">JoeSchmoe8</a>
-          <a href="<?= $base ?>watrre.php">Watrre</a>
-          <a href="<?= $base ?>okdragon.php">OkDragon</a>
-          <a href="<?= $base ?>melon.php">Melon</a>
-          <a href="<?= $base ?>shadowhunter.php">ShadowHunter</a>
+          <?php foreach ($_header_faction_groups as $_header_faction_name => $_header_faction_members): ?>
+            <div class="faction-item">
+              <a class="faction-link" href="<?= htmlspecialchars($_header_faction_page_map[$_header_faction_name] ?? '/characters.php') ?>">
+                <?= htmlspecialchars($_header_faction_name) ?>
+              </a>
+              <div class="faction-submenu">
+                <?php foreach ($_header_faction_members as $_header_member): ?>
+                  <a class="character-link" href="<?= htmlspecialchars($_header_member['page']) ?>">
+                    <?php if (!empty($_header_member['avatar'])): ?>
+                      <img src="<?= htmlspecialchars($_header_member['avatar']) ?>" alt="<?= htmlspecialchars($_header_member['name']) ?>">
+                    <?php endif; ?>
+                    <span><?= htmlspecialchars($_header_member['name']) ?></span>
+                  </a>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
 
@@ -204,10 +296,10 @@ $_use_timer   = in_array($_current, $_fixed_pages);
 /* ── Dropdown Menu ── */
 .dropdown-menu {
   position: absolute;
-  top: 100%;              /* was 150% */
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 0.6rem;     /* creates visual spacing WITHOUT hover gap */
+  margin-top: 0.6rem;
   background: <?= htmlspecialchars($_header_color) ?>;
   padding: 1rem 1.5rem;
   border-radius: 12px;
@@ -220,10 +312,15 @@ $_use_timer   = in_array($_current, $_fixed_pages);
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
   white-space: nowrap;
   z-index: 2000;
+  min-width: 220px;
 }
 
-/* Dropdown links */
-.dropdown-menu a {
+.faction-item {
+  position: relative;
+}
+
+.faction-link,
+.character-link {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
   letter-spacing: 0.15em;
@@ -231,6 +328,47 @@ $_use_timer   = in_array($_current, $_fixed_pages);
   color: <?= $_text_muted ?>;
   text-decoration: none;
   transition: color 0.2s ease;
+}
+
+.faction-link:hover,
+.character-link:hover {
+  color: <?= $_text_muted_hover ?>;
+}
+
+.faction-submenu {
+  position: absolute;
+  left: 100%;
+  top: -0.5rem;
+  margin-left: 0.75rem;
+  background: <?= htmlspecialchars($_header_color) ?>;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.character-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.character-link img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 999px;
+}
+
+.faction-item:hover .faction-submenu {
+  opacity: 1;
+  visibility: visible;
 }
 
 .nav-dropdown::after {
