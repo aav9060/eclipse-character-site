@@ -19,6 +19,7 @@ $gallery = $data['gallery'] ?? [];
 $characterInfo = $data['character_info'] ?? $data['player_info'] ?? [];
 $profession = $characterInfo['profession'] ?? $characterInfo['role'] ?? $data['profession'] ?? '';
 $faction = $data['faction'] ?? $characterInfo['faction'] ?? '';
+$factionPage = $data['faction_page'] ?? $characterInfo['faction_page'] ?? '';
 $background = $data['background'] ?? $characterInfo['background'] ?? '';
 $power = $data['power'] ?? $characterInfo['power'] ?? '';
 $associatedGod = $data['associated_god'] ?? $data['god'] ?? $characterInfo['associated_god'] ?? '';
@@ -67,10 +68,12 @@ $socials = $data['socials'] ?? [];
       </div>
       <?php endif; ?>
       <?php if ($faction): ?>
+      <a href="../<?= htmlspecialchars($factionPage) ?>">
       <div class="social-link">
         <span class="social-platform">Faction</span>
         <span class="social-handle"><?= htmlspecialchars($faction) ?></span>
       </div>
+      </a>
       <?php endif; ?>
       <?php if ($background): ?>
       <div class="social-link">
@@ -180,18 +183,6 @@ $socials = $data['socials'] ?? [];
     <img id="imageLightboxImage" src="" alt="Expanded gallery image" />
   </div>
 
-  <?php if (!empty($socials)): ?>
-  <section class="reveal">
-    <div class="socials reveal-stagger">
-      <?php foreach ($socials as $s): ?>
-      <a class="social-link" href="<?= htmlspecialchars($s['url']) ?>" target="_blank" rel="noopener">
-        <span class="social-platform"><?= htmlspecialchars($s['platform']) ?></span>
-        <span class="social-handle"><?= htmlspecialchars($s['handle']) ?></span>
-      </a>
-      <?php endforeach; ?>
-    </div>
-  </section>
-  <?php endif; ?>
 
 </div>
 

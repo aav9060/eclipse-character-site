@@ -2,7 +2,7 @@
 $_page_title = 'Characters';
 $characterFiles = [
   ['slug' => 'lancelot.php', 'json' => 'lancelot.json'],
-  ['slug' => 'astra.php', 'json' => 'astra.json'],
+  ['slug' => 'anesthesia.php', 'json' => 'anesthesia.json'],
 ];
 
 $characterEntries = [];
@@ -70,7 +70,7 @@ if ($selectedFaction !== '' && isset($groupedCharacters[$selectedFaction])) {
         <ul class="character-list">
           <?php foreach ($characters as $character): ?>
             <li class="character-list-item">
-              <a href="./player-pages/<?= htmlspecialchars($character['slug']) ?>">
+              <a href="./character-pages/<?= htmlspecialchars($character['slug']) ?>">
                 <?php if (!empty($character['image'])): ?>
                   <img src="<?= htmlspecialchars($character['image']) ?>" alt="<?= htmlspecialchars($character['title']) ?>" />
                 <?php endif; ?>

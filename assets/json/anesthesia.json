@@ -1,28 +1,30 @@
 {
-  "avatar_src": "../assets/images/anesthesia.png",
-  "portrait_src": "../assets/images/ana-profile.png",
+  "avatar_src": "../assets/images/anesthesia/anesthesia.png",
+  "portrait_src": "../assets/images/anesthesia/ana-profile.png",
+  "character_title": "../assets/images/lancelot/lancelot-title.png",
   "bullets": [
     "A tired soul who can no longer remember her past.",
     "Has the strength to manipulate any technology she wishes.",
     "Awfully sleepy and just wants everyone to slow down."
   ],
   "faction": "Echo//Net",
+  "faction_page":"./factions/echonet.php",
   "character_info": {
     "first_name": "Liliana",
     "last_name": "",
     "nickname": "Anesthesia",
     "profession": "Leader of Echo//Net",
-    "background": "She cannot recall anything before waking up in the hospital",
+    "background": "A shell with no memories but a strength beyond her comprehension. Her mind cannot remember, but her body knows her power.",
     "weapon": "Giant Mechanical Hands"
   },
   "flair": {
     "emoji": "✨",
-    "color": "#4b5dff"
+    "color": "#6fdbe8"
   },
-  "bio": "Astra moves between forgotten shrines and city markets, carrying messages that are sometimes more dangerous than they seem.",
-  "gallery": ["../assets/images/anesthesia.png", "../assets/images/ana-profile.png"],
+  "bio": "",
+  "gallery": ["../assets/images/anesthesia/anesthesia.png", "../assets/images/anesthesia/ana-profile.png"],
   "relationships": [
-    { "name": "Lancelot", "page": "/player-pages/lancelot.php" }
+    { "name": "Lancelot", "page": "/character-pages/lancelot.php" }
   ],
   "power": "Can turn anything \"on or off\" for a brief moment, can also manipulate any technology to her will.",
   "associated_god": "Lunealis",
@@ -30,6 +32,5 @@
     "Was caught in the epicenter of the Eclipse, and now has the Fading Disease. ",
     "She tries to cover up as much of her body as possible because parts of her have already faded, including her own hands.",
     "Even though she cannot remember her past, she maintains her muscle memory of her power and knows how to manipulate things from the get-go."
-  ],
-  "socials": []
+  ]
 }

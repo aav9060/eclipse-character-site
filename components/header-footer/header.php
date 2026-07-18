@@ -3,7 +3,7 @@
 $_header_page = basename($_SERVER['SCRIPT_NAME']);
 $_header_character_map = [
     'lancelot.php' => 'lancelot.json',
-    'astra.php'    => 'astra.json',
+    'anesthesia.php'    => 'anesthesia.json',
 ];
 
 $_header_json = null;
@@ -49,9 +49,7 @@ if (file_exists($_header_json)) {
         $_header_title_image = '';
         $_header_full_name = trim(implode(' ', array_filter([$_header_fn, $_header_ln])));
         $_header_display_name = trim($_header_un ?: $_header_full_name);
-        if ($_header_page === 'lancelot.php' || $_header_page === 'astra.php') {
-            $_header_title_image = '../assets/images/lancelot-title.png';
-        }
+        $_header_title_image = $_header_character_data['character_title'];
 
         $_header_scroll_items = [];
         foreach ($_header_parts as $_header_part_key => $_header_part_value) {
@@ -91,8 +89,8 @@ $_current = basename($_SERVER['SCRIPT_NAME']);
 
 $_header_faction_groups = [];
 $_header_faction_page_map = [
-    'The Warden Circle' => '/factions/the-warden-circle.php',
-    'The Lantern Covenant' => '/factions/the-lantern-covenant.php',
+    'Echo//Net' => '/factions/echonet.php',
+    'Archeologist Faction' => '/factions/archeologists.php',
 ];
 foreach ($_header_character_map as $_header_page_key => $_header_json_file) {
     $_header_faction_path = __DIR__ . '/../../assets/json/' . $_header_json_file;
@@ -110,7 +108,7 @@ foreach ($_header_character_map as $_header_page_key => $_header_json_file) {
 
     $_header_faction_groups[$_header_faction_name][] = [
         'name' => $_header_character_name,
-        'page' => '/player-pages/' . $_header_page_key,
+        'page' => '/character-pages/' . $_header_page_key,
         'avatar' => $_header_faction_data['portrait_src'] ?? $_header_faction_data['avatar_src'] ?? '',
     ];
 }
@@ -126,7 +124,7 @@ $_nav_links = [
 ];
 
 // Pages with overflow:hidden / no window scroll — pill triggers on a timer
-$_fixed_pages = ['lancelot.php', 'astra.php', 'characters.php', 'archeologists.php', 'echonet.php'];
+$_fixed_pages = ['lancelot.php', 'anesthesia.php', 'characters.php', 'archeologists.php', 'echonet.php'];
 $_use_timer   = in_array($_current, $_fixed_pages);
 // ──────────────────────────────────────────────────────────────────────────────
 ?>
@@ -179,228 +177,73 @@ $_use_timer   = in_array($_current, $_fixed_pages);
   </div>
 </nav>
 
+<link rel="stylesheet" href="/assets/css/header.css">
+
 <style>
-  .site-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    padding: 0;
-    transition: padding 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  :root {
+    --header-color: <?= htmlspecialchars($_header_color) ?>;
+    --header-muted: <?= htmlspecialchars($_text_muted) ?>;
+    --header-muted-hover: <?= htmlspecialchars($_text_muted_hover) ?>;
+    --header-separator: <?= htmlspecialchars($_separator_color) ?>;
   }
-
-  /* ── Expanded state (top of page) ── */
-  .nav-inner {
-    max-width: 100vw;
-    width: 100%;
-    background: <?= htmlspecialchars($_header_color) ?>;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    padding: 1.1rem 2.5rem;
-    border-radius: 0;
-    transition:
-      max-width   0.7s cubic-bezier(0.4, 0, 0.2, 1),
-      padding     0.6s cubic-bezier(0.4, 0, 0.2, 1),
-      border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-      box-shadow  0.6s ease;
-  }
-
-  /* ── Scrolled / pill state ── */
-  .site-nav.scrolled {
-    padding: 0.75rem 1rem;
-    pointer-events: none;
-  }
-
-  .site-nav.scrolled .nav-inner {
-    max-width: 320px;
-    padding: 0.6rem 2rem;
-    border-radius: 999px;
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.35);
-    pointer-events: all;
-  }
-
-  /* ── Hover on pill — re-extends to full bar (player.php) ── */
-  .site-nav.scrolled:hover {
-    padding: 0;
-    pointer-events: all;
-  }
-
-  .site-nav.scrolled:hover .nav-inner {
-    max-width: 100vw;
-    padding: 1.1rem 2.5rem;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  /* ── Nav links ── */
-  .nav-inner a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: <?= $_text_muted ?>;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .nav-inner a:hover {
-    color: <?= $_text_muted_hover ?>;
-  }
-
-  /* ── Active page link ── */
-  .nav-inner a.nav-active {
-    color: <?= $_text_muted_hover ?>;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  /* ── Dot separator between links ── */
-  .nav-sep {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: <?= $_separator_color ?>;
-    pointer-events: none;
-    line-height: 1;
-  }
-  /* ── Dropdown Container ── */
-.nav-dropdown {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-/* Remove button styling */
-.dropdown-toggle {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: <?= $_text_muted ?>;
-  padding: 0;
-}
-
-/* Hover color */
-.dropdown-toggle:hover {
-  color: <?= $_text_muted_hover ?>;
-}
-
-/* ── Dropdown Menu ── */
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 0.6rem;
-  background: <?= htmlspecialchars($_header_color) ?>;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-  white-space: nowrap;
-  z-index: 2000;
-  min-width: 220px;
-}
-
-.faction-item {
-  position: relative;
-}
-
-.faction-link,
-.character-link {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: <?= $_text_muted ?>;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.faction-link:hover,
-.character-link:hover {
-  color: <?= $_text_muted_hover ?>;
-}
-
-.faction-submenu {
-  position: absolute;
-  left: 100%;
-  top: -0.5rem;
-  margin-left: 0.75rem;
-  background: <?= htmlspecialchars($_header_color) ?>;
-  padding: 0.85rem 1rem;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  min-width: 220px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-}
-
-.character-link {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.character-link img {
-  width: 28px;
-  height: 28px;
-  object-fit: cover;
-  border-radius: 999px;
-}
-
-.faction-item:hover .faction-submenu {
-  opacity: 1;
-  visibility: visible;
-}
-
-.nav-dropdown::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  height: 12px;
-}
-
-.dropdown-menu a:hover {
-  color: <?= $_text_muted_hover ?>;
-}
-
-/* Show on hover */
-.nav-dropdown:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Active state underline */
-.nav-dropdown.nav-active .dropdown-toggle {
-  color: <?= $_text_muted_hover ?>;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
 </style>
 
 <script>
   (function () {
     const nav = document.getElementById('siteNav');
+    if (!nav) return;
+
+    nav.querySelectorAll('.nav-dropdown').forEach(function (dropdown) {
+      let closeTimer;
+      let subCloseTimer;
+
+      const openMenu = function () {
+        clearTimeout(closeTimer);
+        dropdown.classList.add('dropdown-open');
+      };
+
+      const closeMenu = function () {
+        clearTimeout(closeTimer);
+        closeTimer = window.setTimeout(function () {
+          dropdown.classList.remove('dropdown-open');
+          dropdown.querySelectorAll('.faction-item').forEach(function (item) {
+            item.classList.remove('dropdown-open');
+          });
+        }, 180);
+      };
+
+      dropdown.addEventListener('mouseenter', openMenu);
+      dropdown.addEventListener('mouseleave', closeMenu);
+      dropdown.addEventListener('focusin', openMenu);
+      dropdown.addEventListener('focusout', function (event) {
+        if (!dropdown.contains(event.relatedTarget)) {
+          closeMenu();
+        }
+      });
+
+      dropdown.querySelectorAll('.faction-item').forEach(function (item) {
+        const openSubmenu = function () {
+          clearTimeout(subCloseTimer);
+          item.classList.add('dropdown-open');
+        };
+
+        const closeSubmenu = function () {
+          clearTimeout(subCloseTimer);
+          subCloseTimer = window.setTimeout(function () {
+            item.classList.remove('dropdown-open');
+          }, 140);
+        };
+
+        item.addEventListener('mouseenter', openSubmenu);
+        item.addEventListener('mouseleave', closeSubmenu);
+        item.addEventListener('focusin', openSubmenu);
+        item.addEventListener('focusout', function (event) {
+          if (!item.contains(event.relatedTarget)) {
+            closeSubmenu();
+          }
+        });
+      });
+    });
 
     <?php if ($_use_timer): ?>
     // index.php — fixed viewport, no scroll: show bar briefly then collapse to pill

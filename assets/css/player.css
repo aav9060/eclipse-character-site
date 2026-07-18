@@ -375,3 +375,7 @@ body {
 .carousel-track:has(.carousel-slide.active video):active {
   cursor: default;
 }
+
+a{
+  text-decoration: none;
+}
