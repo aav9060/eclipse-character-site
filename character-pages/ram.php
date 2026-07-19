@@ -29,7 +29,7 @@ $bullets = $_header_bullets ?? [];
    <div class="colored-side" style="background:<?= htmlspecialchars($_header_color) ?>;"></div>
   <div class="dark-content">
     <?php if (!empty($_header_title_image)): ?>
-      <img class="character-title-image" src="<?= htmlspecialchars($_header_title_image) ?>" alt="Lancelot title" />
+      <img class="character-title-image" src="<?= htmlspecialchars($_header_title_image) ?>" alt="Astra title" />
     <?php else: ?>
       <h1 class="main-title"><?= htmlspecialchars($_header_title) ?></h1>
     <?php endif; ?>
@@ -37,7 +37,6 @@ $bullets = $_header_bullets ?? [];
       <div class="character-full-name"><?= htmlspecialchars(trim(implode(' ', array_filter([$_header_fn ?? '', $_header_ln ?? ''])))) ?></div>
       <div class="character-nickname"><?= htmlspecialchars($_header_un ?: '') ?></div>
     </div>
-    
     <div class="feature-frames">
       <div class="feature-frame"> 
         <div class="frame-image" style="border:3px solid <?= htmlspecialchars($_header_color) ?>;"> 
@@ -69,7 +68,6 @@ $bullets = $_header_bullets ?? [];
   </div>
 </div>
 
-<!-- Pass scroll text to JS, then run -->
 <script>window.SCROLL_TEXT = <?= json_encode($_header_scroll_text) ?>; window.PRIMARY_COLOR = <?= json_encode($_header_color) ?>;</script>
 <script src="../assets/js/background.js"></script>
 

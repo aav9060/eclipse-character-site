@@ -29,7 +29,7 @@ $bullets = $_header_bullets ?? [];
    <div class="colored-side" style="background:<?= htmlspecialchars($_header_color) ?>;"></div>
   <div class="dark-content">
     <?php if (!empty($_header_title_image)): ?>
-      <img class="character-title-image" src="<?= htmlspecialchars($_header_title_image) ?>" alt="Lancelot title" />
+      <img class="character-title-image" src="<?= htmlspecialchars($_header_title_image) ?>" alt="Ciabatta title" />
     <?php else: ?>
       <h1 class="main-title"><?= htmlspecialchars($_header_title) ?></h1>
     <?php endif; ?>

@@ -29,13 +29,14 @@ $bullets = $_header_bullets ?? [];
    <div class="colored-side" style="background:<?= htmlspecialchars($_header_color) ?>;"></div>
   <div class="dark-content">
     <?php if (!empty($_header_title_image)): ?>
-      <img class="character-title-image" src="<?= htmlspecialchars($_header_title_image) ?>" alt="Astra title" />
+      <img class="character-title-image" src="<?= htmlspecialchars($_header_title_image) ?>" alt="Anesthesia title" />
     <?php else: ?>
       <h1 class="main-title"><?= htmlspecialchars($_header_title) ?></h1>
     <?php endif; ?>
     <div class="character-name-meta">
       <div class="character-full-name"><?= htmlspecialchars(trim(implode(' ', array_filter([$_header_fn ?? '', $_header_ln ?? ''])))) ?></div>
       <div class="character-nickname"><?= htmlspecialchars($_header_un ?: '') ?></div>
+      <div class="character-voiceActor">EN VA: <?= htmlspecialchars($_header_va ?: '')?></div>
     </div>
     <div class="feature-frames">
       <div class="feature-frame"> 
@@ -43,20 +44,20 @@ $bullets = $_header_bullets ?? [];
           <img src="../assets/images/role-icon/support.png" alt="Feature One"> 
         </div> 
         <div class="frame-title">Role</div> 
-        <div class="frame-subtitle">SUPPORT</div> 
+        <div class="frame-subtitle"><?= htmlspecialchars($_header_role) ?></div> 
       </div> 
       <div class="feature-frame"> 
         <div class="frame-image" style="border:3px solid <?= htmlspecialchars($_header_color) ?>;"> 
           <img src="../assets/images/faction-icon/archeology.png" alt="Feature Two"> 
         </div> 
         <div class="frame-title">Faction</div> 
-        <div class="frame-subtitle">ARCHEOLOGY FACTION</div> 
+        <div class="frame-subtitle"><?= htmlspecialchars($_header_faction_title) ?></div> 
       </div> <div class="feature-frame"> 
         <div class="frame-image" style="border:3px solid <?= htmlspecialchars($_header_color) ?>;"> 
           <img src="../assets/images/weapon-type/fist.png" alt="Feature Three"> 
         </div> 
         <div class="frame-title">Weapon Type</div> 
-        <div class="frame-subtitle">MELEE</div> 
+        <div class="frame-subtitle"><?= htmlspecialchars($_header_weapon_type) ?></div> 
       </div>
     </div>
    <ul class="bullets">

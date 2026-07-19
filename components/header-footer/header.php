@@ -1,9 +1,32 @@
 <?php
+// WHEN ADDING A NEW CHARACTER TO THE WEBSITE: DO THE FOLLOWING: 
+
+// 1. CREATE THEIR JSON FILE. -> easy to read file :)
+// 2. ADD ALL IMAGES TO THEIR SPECIFIC FOLDER WITHIN IMAGES -> organized storage
+// 3. CREATE THEIR PAGE IN THE CHARACTER-PAGES FOLDER  -> creates their page
+// 4. ADD THEM TO THE MAP ON LINE 23 of HEADER.PHP -> adds the actual clickable links to the website
+// 5. ADD THEM TO THE MAP $_fixed_pages IN HEADER.PHP -> makes the nav bar animation work
+// 6. ADD THEM TO THEIR RESPECTIVE FACTION PAGE -> seperate map
+// 7. ADD THEM TO LINE 3 OF CHARACTERS.PHP -> populates the character page
+
+
+
+// TO ADD A NEW FACTION, DO THE FOLLOWING:
+
+// 1. CREATE THEIR PHP PAGE IN ./FACTIONS/
+// 2. ADD THEIR LINK TO LINES 113 AND TO THE MAP $_fixed_pages IN HEADER.PHP 
+// 3. ADD IT TO LINE 32 OF CHARACTERS.PHP
+
+
 // ─── Initialize character data and header color ───────────────────────────
 $_header_page = basename($_SERVER['SCRIPT_NAME']);
 $_header_character_map = [
     'lancelot.php' => 'lancelot.json',
     'anesthesia.php'    => 'anesthesia.json',
+    'ciabatta.php' => 'ciabatta.json',
+    'ram.php' => 'ram.json',
+    'paradise.php' => 'paradise.json',
+    'jackknife.php' => 'jackknife.json',
 ];
 
 $_header_json = null;
@@ -35,6 +58,10 @@ if (file_exists($_header_json)) {
         $_header_ln = $_header_parts['last_name'] ?? $_header_parts['lastname'] ?? '';
         $_header_emoji = $_header_character_data['flair']['emoji'] ?? '';
         $_header_color = $_header_character_data['flair']['color'] ?? '#87cefa';
+        $_header_role = $_header_parts['role'] ?? '';
+        $_header_weapon_type = $_header_parts['weaponType'] ?? '';
+        $_header_faction_title = $_header_character_data['faction'] ?? 'Unassigned';
+        $_header_va = $_header_parts['voiceActor'];
 
         $_header_title_parts = array_filter([
             $_header_fn ?: null,
@@ -91,6 +118,9 @@ $_header_faction_groups = [];
 $_header_faction_page_map = [
     'Echo//Net' => '/factions/echonet.php',
     'Archeologist Faction' => '/factions/archeologists.php',
+    'Pillars of Sol' => '/factions/pillarsofsol.php',
+    'The Flock' => '/factions/flock.php',
+    'Neverwhere' => '/factions/neverwhere.php',
 ];
 foreach ($_header_character_map as $_header_page_key => $_header_json_file) {
     $_header_faction_path = __DIR__ . '/../../assets/json/' . $_header_json_file;
@@ -124,7 +154,7 @@ $_nav_links = [
 ];
 
 // Pages with overflow:hidden / no window scroll — pill triggers on a timer
-$_fixed_pages = ['lancelot.php', 'anesthesia.php', 'characters.php', 'archeologists.php', 'echonet.php'];
+$_fixed_pages = ['lancelot.php', 'anesthesia.php', 'ciabatta.php', 'ram.php', 'paradise.php', 'jackknife.php', 'characters.php', 'archeologists.php', 'echonet.php', 'pillarsofsol.php', 'neverwhere.php'];
 $_use_timer   = in_array($_current, $_fixed_pages);
 // ──────────────────────────────────────────────────────────────────────────────
 ?>

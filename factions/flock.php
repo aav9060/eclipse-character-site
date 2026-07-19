@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../components/bio.php';
 
-$_page_title = 'Echo//Net';
+$_page_title = 'The Flock';
 $characterFiles = [
-  ['slug' => 'anesthesia.php', 'json' => 'anesthesia.json'],
+  ['slug' => 'paradise.php', 'json' => 'paradise.json'],
 ];
 
 $characters = [];

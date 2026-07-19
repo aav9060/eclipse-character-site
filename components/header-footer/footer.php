@@ -55,7 +55,6 @@ $_footer_copy   = '© ' . $_footer_year . ($_footer_name ? ' ' . $_footer_name :
   <?php else: ?>
 
     <!-- Full footer: nav + socials + copyright -->
-    <div class="footer-inner">
 
       <?php if (!empty($_footer_nav)): ?>
       <nav class="footer-nav">

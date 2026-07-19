@@ -4,6 +4,7 @@ require_once __DIR__ . '/../components/bio.php';
 $_page_title = 'The Archeologist Faction';
 $characterFiles = [
   ['slug' => 'lancelot.php', 'json' => 'lancelot.json'],
+  ['slug' => 'ciabatta.php', 'json'=>'ciabatta.json'],
 ];
 
 $characters = [];
@@ -43,7 +44,7 @@ usort($characters, function ($a, $b) {
 <body>
 <?php include '../components/header-footer/header.php'; ?>
 <main class="page-content">
-  <h1>The Archeologist Faction</h1>
+  <h1><?= htmlspecialchars($_page_title)?></h1>
   <div class="character-list-view">
     <?php foreach ($characters as $character): ?>
       <a class="character-card" href="../character-pages/<?= htmlspecialchars($character['slug']) ?>">

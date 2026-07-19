@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../components/bio.php';
 
-$_page_title = 'Echo//Net';
+$_page_title = 'Pillars of Sol';
 $characterFiles = [
-  ['slug' => 'anesthesia.php', 'json' => 'anesthesia.json'],
+  ['slug' => 'ram.php', 'json' => 'ram.json'],
 ];
 
 $characters = [];
