@@ -36,6 +36,7 @@ $bullets = $_header_bullets ?? [];
     <div class="character-name-meta">
       <div class="character-full-name"><?= htmlspecialchars(trim(implode(' ', array_filter([$_header_fn ?? '', $_header_ln ?? ''])))) ?></div>
       <div class="character-nickname"><?= htmlspecialchars($_header_un ?: '') ?></div>
+      <div class="character-voiceActor">EN VA: <?= htmlspecialchars($_header_va ?: 'n/a')?></div>
     </div>
     <div class="feature-frames">
       <div class="feature-frame"> 

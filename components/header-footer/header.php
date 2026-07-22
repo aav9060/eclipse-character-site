@@ -27,6 +27,19 @@ $_header_character_map = [
     'ram.php' => 'ram.json',
     'paradise.php' => 'paradise.json',
     'jackknife.php' => 'jackknife.json',
+    'mina.php' => 'mina.json',
+    'rogue.php' => 'rogue.json',
+    'gemini.php' => 'gemini.json',
+    'slyx.php' => 'slyx.json',
+    '4j.php' => '4j.json',
+    'clockwork.php' => 'clockwork.json',
+    'bracken.php' => 'bracken.json',
+    'mahere.php' => 'mahere.json',
+    'nexus.php' => 'nexus.json',
+    'chili.php' => 'chili.json',
+    'etude.php' => 'etude.json',
+    'shade.php' => 'shade.json',
+    'umi.php' => 'umi.json'
 ];
 
 $_header_json = null;
@@ -154,7 +167,7 @@ $_nav_links = [
 ];
 
 // Pages with overflow:hidden / no window scroll — pill triggers on a timer
-$_fixed_pages = ['lancelot.php', 'anesthesia.php', 'ciabatta.php', 'ram.php', 'paradise.php', 'jackknife.php', 'characters.php', 'archeologists.php', 'echonet.php', 'pillarsofsol.php', 'neverwhere.php'];
+$_fixed_pages = ['lancelot.php', 'anesthesia.php', 'ciabatta.php', 'ram.php', 'paradise.php', 'jackknife.php', 'mina.php', 'rogue.php', 'gemini.php', 'slyx.php', '4j.php', 'clockwork.php', 'bracken.php', 'mahere.php', 'nexus.php', 'chili.php', 'etude.php', 'shade.php','umi.php', 'characters.php', 'archeologists.php', 'echonet.php', 'pillarsofsol.php', 'neverwhere.php'];
 $_use_timer   = in_array($_current, $_fixed_pages);
 // ──────────────────────────────────────────────────────────────────────────────
 ?>

@@ -168,6 +168,12 @@ body {
   font-weight: 400;
 }
 
+.social-connection{
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
 /* ── Gallery Carousel ───────────────────────────────────────────────────── */
 .carousel {
   display: flex;

@@ -4,6 +4,8 @@ require_once __DIR__ . '/../components/bio.php';
 $_page_title = 'The Flock';
 $characterFiles = [
   ['slug' => 'paradise.php', 'json' => 'paradise.json'],
+  ['slug' => 'mina.php', 'json' => 'mina.json'],
+  ['slug' => '4j.php', 'json' => '4j.json'],
 ];
 
 $characters = [];

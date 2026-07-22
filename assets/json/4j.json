@@ -1,6 +1,6 @@
 {
   "avatar_src": "../assets/images/anesthesia/anesthesia.png",
-  "portrait_src": "../assets/images/paradise/paradise-profile.png",
+  "portrait_src": "../assets/images/4j/4j-profile.png",
   "character_title": "../assets/images/lancelot/lancelot-title.png",
   "bullets": [
     "A tired soul who can no longer remember her past.",
@@ -12,7 +12,7 @@
   "character_info": {
     "first_name": "Catalina",
     "last_name": "Martinez",
-    "nickname": "Paradise",
+    "nickname": "4J",
     "profession": "Leader of Echo//Net",
     "background": "A shell with no memories but a strength beyond her comprehension. Her mind cannot remember, but her body knows her power.",
     "weapon": "Giant Mechanical Hands",

@@ -27,7 +27,7 @@
   "bio": "",
   "gallery": ["../assets/images/ram/ram-profile.png"],
   "relationships": [
-    { "name": "Lancelot", "page": "/character-pages/lancelot.php" }
+    {  }
   ],
   "power": "Can turn anything \"on or off\" for a brief moment, can also manipulate any technology to her will.",
   "associated_god": "Lunealis",

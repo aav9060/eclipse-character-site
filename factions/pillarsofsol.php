@@ -4,6 +4,8 @@ require_once __DIR__ . '/../components/bio.php';
 $_page_title = 'Pillars of Sol';
 $characterFiles = [
   ['slug' => 'ram.php', 'json' => 'ram.json'],
+  ['slug' => 'clockwork.php', 'json' => 'clockwork.json'],
+  ['slug' => 'gemini.php', 'json' => 'gemini.json'],
 ];
 
 $characters = [];

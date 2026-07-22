@@ -6,7 +6,20 @@ $characterFiles = [
   ['slug' => 'ciabatta.php', 'json' => 'ciabatta.json'],
   ['slug' => 'ram.php', 'json' => 'ram.json'],
   ['slug' => 'paradise.php', 'json' =>'paradise.json'],
-  ['slug' => 'jackknife.php', 'json'=>'jackknife.json']
+  ['slug' => 'jackknife.php', 'json'=>'jackknife.json'],
+  ['slug' => 'mina.php', 'json'=>'mina.json'],
+  ['slug' => 'rogue.php', 'json'=>'rogue.json'],
+  ['slug' => 'gemini.php', 'json'=>'gemini.json'],
+  ['slug' => 'slyx.php', 'json'=>'slyx.json'],
+  ['slug' => '4j.php', 'json'=>'4j.json'],
+  ['slug' => 'clockwork.php', 'json'=>'clockwork.json'],
+  ['slug' => 'bracken.php', 'json'=>'bracken.json'],
+  ['slug' => 'mahere.php', 'json'=>'mahere.json'],
+  ['slug' => 'nexus.php', 'json'=>'nexus.json'],
+  ['slug' => 'chili.php', 'json'=>'chili.json'],
+  ['slug' => 'etude.php', 'json'=>'etude.json'],
+  ['slug' => 'shade.php', 'json'=>'shade.json'],
+  ['slug' => 'umi.php', 'json'=>'umi.json'],
 ];
 
 $characterEntries = [];

@@ -1,18 +1,18 @@
 {
   "avatar_src": "../assets/images/lancelot/lancelot-with-souls.png",
-  "portrait_src": "../assets/images/ciabatta/ciabatta-profile.png",
+  "portrait_src": "../assets/images/etude/etude-profile.png",
   "character_title": "../assets/images/lancelot/lancelot-title.png",
   "bullets": [
     "After being blessed by the Goddess of the Moon at 16, she now has incredible physical strength powered by her planet's moons's souls.",
     "Her callsign is Lancelot because she is incredibly strong and morally bound to her Goddess, but she has accidentally slept with two of her bosses's partners.",
     "Her two spirts that she manipulates are called Waxing and Wanning."
   ],
-  "faction": "Archeologist Faction",
-  "faction_page":"./factions/archeologists.php",
+  "faction": "Neverwhere",
+  "faction_page":"./factions/neverwhere.php",
   "character_info": {
-    "first_name": "Lycoris",
-    "last_name": "C'miya",
-    "nickname": "Ciabatta",
+    "first_name": "Gianna Dasia",
+    "last_name": "Moore",
+    "nickname": "Etude",
     "profession": "Archeologist",
     "background": "Blessed at the age of 16 after beating up a group of guys during a double moon alignment, where one moon was in waxing and the other was wanning, a very rare event.",
     "weapon": "Bare hands/Moon Spirits",
@@ -22,12 +22,12 @@
   },
   "flair": {
     "emoji": "🌙",
-    "color": "#f69d3c"
+    "color": "#f1c232"
   },
   "bio": "\tShe was born in [City], [Country] on the Dawn Continent, a small coastal town where her mother ran a luxury antique shop specializing in ancient relics, and her father spent his days out on the water as a fisherman. It was he who first told her how the sea \"ate the old village,\" a little more with each passing year. As a child, she treasured the shells, bones, and shards of broken pottery that washed ashore after storms, lining them along her bookshelf as if they were the finest possessions she owned. It was as if she was mimicing her mother's shop and showing off her finds. Everything changed at 16, during a field trip to a nearby dig site. She watched archaeologists carefully sift through layers of soil, drawing out charcoal, seeds, and animal bones, each one a clue to what people had eaten, how the climate had shifted, and why an entire settlement had vanished centuries before. It was nothing like the polished relics she'd grown up surrounded by in her mother's shop. This wasn't collecting; it was reading the land itself, a record where human history and the natural world were written together. She found herself sneaking into the dig site at night and exploring herself. One night in the 8th month during a total alignment of both moons, she found a group of kids trying to break into the dig site to vandalize all the hard work the scientists had put in. Greatly upset by this and filled with the strength of the moon's pull, she found herself with the ability to take out eight guys twice the size of her. The Goddess of the Moon, who happened to be there at that moment, was incredibly shocked at her determination and granted her Her strength. Taking a small piece of the two moons of the planet, she bestowed Chara with Wanning and Waxing, two moon spirits that improve her strength and resilience dependent on the phase of the moon. The closer the moons are to her, the more incredulous her strength grows.\n\n\tShe went on to study archaeology, earth sciences, and mineralogy, drawn most to the question of how ancient communities had adapted to droughts, floods, and the dramatic shift in the land's quality between the old world of Earth and the world they now knew. Her thesis focused on sediment cores pulled from a long-vanished harbor settlement, tracing how a series of violent storms between four and five thousand years ago, paired with dwindling resources, had ultimately forced its people to abandon their home. She graduated at twenty-three and soon found herself working at one of the largest museums along her coastline. There, she explored the depth of the world, finding herself especialy drawn to the moons's effects on the natural environment, which was shockingly more significant than she ever thought to believe.\n\n\tOutside of work, her life was very casual. She hung out at bookstores and rock climbed with a few of her friends from work. Platonically, she was incredibly strong, but romantically, she often struggled since she was so devouted to her work and her goddess. So to fill in that empty part of her, she found herself drawn to certain expensive bars on weekends where she would often find herself romantically involved with people many years older than her. One day, she found herself with a beautiful older woman who kept her identity rather secretive. After a night of passion, she woke up alone in a house she thought was... too familiar. As she got up and got ready to leave, she recognized the photo sitting on the nightstand. Dread filled her as she recognized her own boss staring back at her. She quickly thanked the older woman for the night and booked it out as quickly as possible. She tried to maintain a sense of professionalism but at one point, it ate away at her so much that she simply quit, never informing her boss of what happened. She got a wonderful letter of recommendation and moved north along the coastline to [City], [Country]. \n\n\t There, she continued her historical studies into fault lines shapped by the moons's pull and its affects on ancient civilizations. She made sure to take a step back from all romantic involvement for a long time. However, for her 27th birthday, she found herself with a few friends at those luxury bars she so adored. She picked up an older man, making sure she knew who he was before even attempting anything. However, she wasn't sober enough to realize that the name he gave her was, once again, her new boss's husband. Unfortunately for her, her boss found out this time. After a large scandel, which also brought the attention of her previous boss, she willingly moved off of the Dawn Continent to the island Continet of Lunealis. Neither of her bosses blamed her, as both of their partners actively knew who she was and still allowed her to pursue them. They even wrote excellent letters of recommendations, but they did state that they would never hire again and if they ever saw her again outside of professional conventions, they would likely turn her into the bones they study. So after accidentally causing two divorces, she settled to work for Ace, a lonely historian obsessed with uncovering the truth behind the, as he claims, misunderstood Goddess of Technology, Lunealis. Ace was long divorced and had no partners so she physically couldn't cause another problem. Now she happily studies Lunealis's island alongside Ace and the other members of their team.",
-  "gallery": [ "../assets/images/ciabatta/ciabatta-profile.png"],
+  "gallery": ["../assets/images/jackknife/jackknife-profile.png"],
   "relationships": [
-    { "name": "Lancelot", "page": "/character-pages/lancelot.php", "relation":"co-worker" }
+    { "name": "Anesthesia", "page": "/character-pages/anesthesia.php", "relation":"contractee" }
   ],
   "power": "Summoning Waxing and Wanning, she can improve her own physical strength ten-fold. However, she cannot wield a weapon.",
   "associated_god": "Goddess of the Moon",

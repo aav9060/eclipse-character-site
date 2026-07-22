@@ -4,6 +4,10 @@ require_once __DIR__ . '/../components/bio.php';
 $_page_title = 'Neverwhere';
 $characterFiles = [
   ['slug' => 'jackknife.php', 'json' => 'jackknife.json'],
+  ['slug' => 'bracken.php', 'json' => 'bracken.json'],
+  ['slug' => 'etude.php', 'json' => 'etude.json'],
+  ['slug' => 'nexus.php', 'json' => 'nexus.json'],
+  ['slug' => 'umi.php', 'json' => 'umi.json'],
 ];
 
 $characters = [];

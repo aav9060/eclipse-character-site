@@ -4,6 +4,11 @@ require_once __DIR__ . '/../components/bio.php';
 $_page_title = 'Echo//Net';
 $characterFiles = [
   ['slug' => 'anesthesia.php', 'json' => 'anesthesia.json'],
+  ['slug' => 'chili.php', 'json' => 'chili.json'],
+  ['slug' => 'mahere.php', 'json' => 'mahere.json'],
+  ['slug' => 'rogue.php', 'json' => 'rogue.json'],
+  ['slug' => 'shade.php', 'json' => 'shade.json'],
+  ['slug' => 'slyx.php', 'json' => 'slyx.json'],
 ];
 
 $characters = [];

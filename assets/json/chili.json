@@ -1,18 +1,18 @@
 {
   "avatar_src": "../assets/images/anesthesia/anesthesia.png",
-  "portrait_src": "../assets/images/paradise/paradise-profile.png",
+  "portrait_src": "../assets/images/chili/chili-profile.png",
   "character_title": "../assets/images/lancelot/lancelot-title.png",
   "bullets": [
     "A tired soul who can no longer remember her past.",
     "Has the strength to manipulate any technology she wishes.",
     "Awfully sleepy and just wants everyone to slow down."
   ],
-  "faction": "The Flock",
-  "faction_page":"./factions/flock.php",
+  "faction": "Echo//Net",
+  "faction_page":"./factions/echonet.php",
   "character_info": {
-    "first_name": "Catalina",
-    "last_name": "Martinez",
-    "nickname": "Paradise",
+    "first_name": "Liliana",
+    "last_name": "",
+    "nickname": "Chili",
     "profession": "Leader of Echo//Net",
     "background": "A shell with no memories but a strength beyond her comprehension. Her mind cannot remember, but her body knows her power.",
     "weapon": "Giant Mechanical Hands",
@@ -22,12 +22,12 @@
   },
   "flair": {
     "emoji": "✨",
-    "color": "#e99a6a"
+    "color": "#6fdbe8"
   },
   "bio": "",
-  "gallery": ["../assets/images/paradise/paradise-profile.png"],
+  "gallery": ["../assets/images/anesthesia/anesthesia.png", "../assets/images/anesthesia/ana-profile.png"],
   "relationships": [
-    {  }
+    { "name": "Jackknife", "page": "/character-pages/jackknife.php", "relation":"contractor" }
   ],
   "power": "Can turn anything \"on or off\" for a brief moment, can also manipulate any technology to her will.",
   "associated_god": "Lunealis",

@@ -108,11 +108,13 @@ $socials = $data['socials'] ?? [];
     <div class="socials reveal-stagger">
       <?php foreach ($relationships as $relationship): ?>
       <?php $name = is_array($relationship) ? ($relationship['name'] ?? '') : (string)$relationship; ?>
+      <?php $relation = is_array($relationship) ? ($relationship['relation'] ?? '') : (string)$relationship; ?>
       <?php $page = is_array($relationship) ? ($relationship['page'] ?? '') : ''; ?>
       <?php if ($name): ?>
       <a class="social-link" href="<?= htmlspecialchars($page ?: '#') ?>" target="_self">
         <span class="social-platform">Linked Character</span>
         <span class="social-handle"><?= htmlspecialchars($name) ?></span>
+        <span class="social-connection"><?= htmlspecialchars($relation) ?></span>
       </a>
       <?php endif; ?>
       <?php endforeach; ?>

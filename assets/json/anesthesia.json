@@ -27,7 +27,7 @@
   "bio": "",
   "gallery": ["../assets/images/anesthesia/anesthesia.png", "../assets/images/anesthesia/ana-profile.png"],
   "relationships": [
-    { "name": "Lancelot", "page": "/character-pages/lancelot.php" }
+    { "name": "Jackknife", "page": "/character-pages/jackknife.php", "relation":"contractor" }
   ],
   "power": "Can turn anything \"on or off\" for a brief moment, can also manipulate any technology to her will.",
   "associated_god": "Lunealis",
